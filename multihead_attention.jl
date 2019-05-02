@@ -36,6 +36,13 @@ function (m::multihead_attention)(x)
     m(x, x, x, false)
 end
 
+function (m::multihead_attention)(tmp, x, mask)
+    m(x, x, x, mask)
+end
+
+function (m::multihead_attention)(top_encoder_output, x)
+    m(top_encoder_output, x, top_encoder_output, false)
+end
 
 #computes scaled dot product attention
 function attention(query, key, value, mask)
